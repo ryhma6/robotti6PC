@@ -11,8 +11,10 @@ import javax.swing.border.EmptyBorder;
 public class AjoFrame extends JFrame {
 
 	private JPanel contentPane;
-
-	/**
+	private NXT_Connection nxtc;
+    boolean keyreleased = false;
+    private Updater up;
+    /**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
@@ -32,6 +34,14 @@ public class AjoFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public AjoFrame() {
+		nxtc = new NXT_Connection();
+        //nxtc.Connect();
+        up = new Updater(nxtc);
+        
+        if (!up.isRunning) {
+            up.start();
+        }
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
